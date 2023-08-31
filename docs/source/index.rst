@@ -20,10 +20,14 @@ To SSH into Perlmutter:
 
    ssh <username>@perlmutter.nersc.gov
 
-Creating Virtual Environment
+Creating and Activating a Virtual Environment
 ----------------------------
 
-Instructions for creating a virtual environment.
+.. code-block:: bash
+
+python -m venv /path/to/new/virtual/environment
+source /path/to/virtual/environment/bin/activate
+
 
 Using NERSC PyTorch Modules
 ---------------------------

@@ -6,13 +6,13 @@ Link to official documentation: https://docs.nersc.gov/
 
 
 
-
-
-
-
-
-
 Contents
+--------
+ssh into Perlmutter
+Creating virtual environment
+Using Pytorch modules
+Huggingface cache and credentials
+
 --------
 
 ssh <username>@perlmutter.nersc.gov 
@@ -24,11 +24,14 @@ ssh <username>@perlmutter.nersc.gov
 
 module load pytorch/2.0.1
 
+**Huggingface Cache**
+Set huggingface cache:
+export HF_DATASETS_CACHE="/pscratch/sd/s/sharma21/“
 
+Load credentials: 
 hugging face-cli login
 hugging face-cli whoami
 
-export HF_DATASETS_CACHE="/pscratch/sd/s/sharma21/“
 
 **Test starcoder**
 python main.py \

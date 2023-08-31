@@ -10,6 +10,7 @@ Contents
 - `Creating Virtual Environment`_
 - `Using NERSC PyTorch Modules`_
 - `Huggingface Cache and Credentials`_
+- `Issues related to perlmutter`_
 
 SSH into Perlmutter
 -------------------
@@ -54,31 +55,12 @@ Huggingface Cache and Credentials
    huggingface-cli login
    huggingface-cli whoami
 
-Test Starcoder
+
+
+Issues related to Perlmutter
 --------------
 
-To test the Starcoder model, run:
 
-.. code-block:: bash
 
-   python main.py \
-       --model hf \
-       --model_args pretrained=bigcode/starcoder \
-       --tasks sciq \
-       --device cuda:0 \
-       --batch_size 8
 
-Add Our Dataset
----------------
-
-To add a custom dataset:
-
-.. code-block:: bash
-
-   python main.py \
-       --model hf \
-       --model_args pretrained=bigcode/starcoder \
-       --tasks sciq \
-       --device cuda:0 \
-       --batch_size 8
 

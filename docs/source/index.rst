@@ -1,52 +1,80 @@
-Welcome to Perlmutter docs!
-===================================
+Welcome to Perlmutter Docs!
+===========================
 
-Link to official documentation: https://docs.nersc.gov/ 
-
-
-
+`Official Documentation <https://docs.nersc.gov/>`_
 
 Contents
 --------
-ssh into Perlmutter
-Creating virtual environment
-Using Pytorch modules
-Huggingface cache and credentials
 
---------
+- `SSH into Perlmutter`_
+- `Creating Virtual Environment`_
+- `Using NERSC PyTorch Modules`_
+- `Huggingface Cache and Credentials`_
 
-ssh <username>@perlmutter.nersc.gov 
+SSH into Perlmutter
+-------------------
 
-**Creating virtual environment**
+To SSH into Perlmutter:
 
+.. code-block:: bash
 
-**Using NERSC PyTorch modules**
+   ssh <username>@perlmutter.nersc.gov
 
-module load pytorch/2.0.1
+Creating Virtual Environment
+----------------------------
 
-**Huggingface Cache**
-Set huggingface cache:
-export HF_DATASETS_CACHE="/pscratch/sd/s/sharma21/“
+Instructions for creating a virtual environment.
 
-Load credentials: 
-hugging face-cli login
-hugging face-cli whoami
+Using NERSC PyTorch Modules
+---------------------------
 
+To load the PyTorch module, use the following command:
 
-**Test starcoder**
-python main.py \
-    --model hf \
-    --model_args pretrained=bigcode/starcoder \
-    --tasks sciq \
-    --device cuda:0 \
-    --batch_size 8
+.. code-block:: bash
 
-**Add our dataset**
-python main.py \
-    --model hf \
-    --model_args pretrained=bigcode/starcoder \
-    --tasks sciq \
-    --device cuda:0 \
-    --batch_size 8
+   module load pytorch/2.0.1
 
+Huggingface Cache and Credentials
+---------------------------------
+
+**Set Huggingface Cache:**
+
+.. code-block:: bash
+
+   export HF_DATASETS_CACHE="/pscratch/sd/s/sharma21/"
+
+**Load Credentials:**
+
+.. code-block:: bash
+
+   huggingface-cli login
+   huggingface-cli whoami
+
+Test Starcoder
+--------------
+
+To test the Starcoder model, run:
+
+.. code-block:: bash
+
+   python main.py \
+       --model hf \
+       --model_args pretrained=bigcode/starcoder \
+       --tasks sciq \
+       --device cuda:0 \
+       --batch_size 8
+
+Add Our Dataset
+---------------
+
+To add a custom dataset:
+
+.. code-block:: bash
+
+   python main.py \
+       --model hf \
+       --model_args pretrained=bigcode/starcoder \
+       --tasks sciq \
+       --device cuda:0 \
+       --batch_size 8
 

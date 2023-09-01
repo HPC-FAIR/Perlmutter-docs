@@ -7,10 +7,10 @@ Contents
 --------
 
 - `SSH into Perlmutter`_
-- `Creating Virtual Environment`_
+- `Creating and Activating a Virtual Environment`_
 - `Using NERSC PyTorch Modules`_
 - `Huggingface Cache and Credentials`_
-- `Issues related to perlmutter`_
+- `Issues related to Perlmutter`_
 
 SSH into Perlmutter
 -------------------
@@ -22,13 +22,12 @@ To SSH into Perlmutter:
    ssh <username>@perlmutter.nersc.gov
 
 Creating and Activating a Virtual Environment
-----------------------------
+--------------------------------------------
 
 .. code-block:: bash
 
-python -m venv /path/to/new/virtual/environment
-source /path/to/virtual/environment/bin/activate
-
+   python -m venv /path/to/new/virtual/environment
+   source /path/to/virtual/environment/bin/activate
 
 Using NERSC PyTorch Modules
 ---------------------------
@@ -55,12 +54,7 @@ Huggingface Cache and Credentials
    huggingface-cli login
    huggingface-cli whoami
 
-
-
 Issues related to Perlmutter
---------------
+----------------------------
 
-
-
-
-
+(Your text here)

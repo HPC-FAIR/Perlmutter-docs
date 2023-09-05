@@ -10,6 +10,7 @@ Contents
 - `Creating and Activating a Virtual Environment`_
 - `Using NERSC PyTorch Modules`_
 - `Huggingface Cache and Credentials`_
+- `Example job script`_
 - `Issues related to Perlmutter`_
 
 SSH into Perlmutter
@@ -53,6 +54,27 @@ Huggingface Cache and Credentials
 
    huggingface-cli login
    huggingface-cli whoami
+
+Example Job Script
+-----------------
+
+Here is an example of a job script:
+
+.. code-block:: bash
+
+   #!/bin/bash
+   #SBATCH -A m2956
+   #SBATCH -C gpu
+   #SBATCH -q regular
+   #SBATCH -t 3:00:00
+   #SBATCH -N 1
+   #SBATCH -c 32
+
+   export HF_HOME=/pscratch/sd/s/sharma21/hf/
+   cd /global/homes/s/sharma21/lm-evaluation-harness
+   source lm-eval/bin/activate
+   cd /global/homes/s/sharma21/bigcode-evaluation-harness
+   module load pytorch/2.0.1
 
 Issues related to Perlmutter
 ----------------------------

@@ -76,6 +76,8 @@ Here is an example of a job script:
    cd /global/homes/s/sharma21/bigcode-evaluation-harness
    module load pytorch/2.0.1
 
+Note: Jobs may explicitly request to run on up to 256 GPU nodes which have 80 GB of GPU-attached memory instead of 40 GB. To request this, use -C gpu&hbm80g in your job script.
+
 Issues related to Perlmutter
 ----------------------------
 

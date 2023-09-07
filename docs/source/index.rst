@@ -81,4 +81,7 @@ Note: Jobs may explicitly request to run on up to 256 GPU nodes which have 80 GB
 Issues related to Perlmutter
 ----------------------------
 
-(Your text here)
+An error occurred: module 'openai' has no attribute 'ChatCompletion'
+.. code-block:: bash
+
+   pip install --upgrade openai

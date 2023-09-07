@@ -46,7 +46,7 @@ Huggingface Cache and Credentials
 
 .. code-block:: bash
 
-   export HF_DATASETS_CACHE="/pscratch/sd/s/sharma21/"
+   export HF_DATASETS_CACHE="<path to directory where cache shoufl be stored>"
 
 **Load Credentials:**
 

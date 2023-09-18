@@ -1,7 +1,7 @@
 Welcome to Perlmutter Docs!
 ===========================
 
-This page documents instructions to get started with Perlmutter and issues encountered while using it. The official documentation for Perlmutter can be found`here <https://docs.nersc.gov/>`_
+This page documents instructions to get started with Perlmutter and issues encountered while using it. The official documentation for Perlmutter can be found `here <https://docs.nersc.gov/>`_.
 
 Contents
 --------
@@ -46,7 +46,7 @@ Huggingface Cache and Credentials
 
 .. code-block:: bash
 
-   export HF_DATASETS_CACHE="<path to directory where cache shoufl be stored>"
+   export HF_DATASETS_CACHE="<path to directory where cache should be stored>"
 
 **Load Credentials:**
 
@@ -54,7 +54,6 @@ Huggingface Cache and Credentials
 
    huggingface-cli login
    huggingface-cli whoami
-
 
 Starting an Interactive Session on Perlmutter
 ---------------------------------------------
@@ -82,9 +81,8 @@ This command requests an interactive session with:
 - Allocating 4 GPUs
 - Using the account "m2959_g"
 
-
 Example Job Script
------------------
+------------------
 
 Here is an example of a job script:
 
@@ -123,5 +121,5 @@ Upgrade the `openai` package:
    pip install --upgrade openai
 
 Issue: File lock issue while loading huggingface datasets
-------------------------------
-
+---------------------------------------------------------
+(Note: Description and solution needed for this issue.)

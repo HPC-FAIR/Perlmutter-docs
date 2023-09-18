@@ -1,7 +1,7 @@
 Welcome to Perlmutter Docs!
 ===========================
 
-`Official Documentation <https://docs.nersc.gov/>`_
+This page documents instructions to get started with Perlmutter and issues encountered while using it. The official documentation for Perlmutter can be found`here <https://docs.nersc.gov/>`_
 
 Contents
 --------
@@ -55,6 +55,34 @@ Huggingface Cache and Credentials
    huggingface-cli login
    huggingface-cli whoami
 
+
+Starting an Interactive Session on Perlmutter
+---------------------------------------------
+
+Before starting an interactive session, it's essential to ensure you're using the right account for allocation. To find the account, you can use the `env | grep ACCOUNT` command, which will provide output similar to:
+
+.. code-block:: bash
+
+   SALLOC_ACCOUNT=m2956_g
+   SBATCH_ACCOUNT=m2956_g
+   SLURM_JOB_ACCOUNT=m2956_g
+
+To initiate an interactive session, use the following `salloc` command:
+
+.. code-block:: bash
+
+   salloc --nodes 1 --qos interactive --time 02:00:00 --constraint gpu --gpus 4 --account=m2959_g
+
+This command requests an interactive session with:
+
+- 1 node
+- Quality of Service set to "interactive"
+- A time limit of 2 hours
+- On a GPU node
+- Allocating 4 GPUs
+- Using the account "m2959_g"
+
+
 Example Job Script
 -----------------
 
@@ -79,9 +107,21 @@ Here is an example of a job script:
 Note: Jobs may explicitly request to run on up to 256 GPU nodes which have 80 GB of GPU-attached memory instead of 40 GB. To request this, use -C gpu&hbm80g in your job script.
 
 Issues related to Perlmutter
-----------------------------
+============================
 
-An error occurred: module 'openai' has no attribute 'ChatCompletion'
+Issue: 'openai' Attribute Error
+------------------------------
+
+**Description:** 
+An error occurred indicating that the module 'openai' lacks the 'ChatCompletion' attribute.
+
+**Solution:**
+Upgrade the `openai` package:
+
 .. code-block:: bash
 
    pip install --upgrade openai
+
+Issue: File lock issue while loading huggingface datasets
+------------------------------
+

@@ -108,19 +108,6 @@ Note: Jobs may explicitly request to run on up to 256 GPU nodes which have 80 GB
 Issues related to Perlmutter
 ============================
 
-Issue: 'openai' Attribute Error
-------------------------------
-
-**Description:** 
-An error occurred indicating that the module 'openai' lacks the 'ChatCompletion' attribute.
-
-**Solution:**
-Upgrade the `openai` package:
-
-.. code-block:: bash
-
-   pip install --upgrade openai
-
-Issue: File lock issue while loading huggingface datasets
+File lock issue while loading huggingface datasets
 ---------------------------------------------------------
 (Note: Description and solution needed for this issue.)

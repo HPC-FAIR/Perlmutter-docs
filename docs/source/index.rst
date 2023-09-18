@@ -10,6 +10,7 @@ Contents
 - `Creating and Activating a Virtual Environment`_
 - `Using NERSC PyTorch Modules`_
 - `Huggingface Cache and Credentials`_
+- `Starting an Interactive Session on Perlmutter`_
 - `Example job script`_
 - `Issues related to Perlmutter`_
 

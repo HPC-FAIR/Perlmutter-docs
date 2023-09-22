@@ -107,10 +107,30 @@ Note: Jobs may explicitly request to run on up to 256 GPU nodes which have 80 GB
 
 Issues related to Perlmutter
 ============================
+Issue: File lock issue while loading huggingface datasets/models (Eg. SentenceTransformer)
+----------------------------------------
 
-File lock issue while loading huggingface datasets/models
----------------------------------------------------------
-I have file lock issues on Perlmutter when my python code tries to download huggingface models/datasets. The symptom is hanging execution.  To debug the issue, you have to run your job in an interative session, and use ctrl+c to stop the hangs. You will then see the execution runs some infinite looping to get file locks.
+**Description:** 
+An issue arises when trying to load the SentenceTransformer model `'paraphrase-MiniLM-L6-v2'`. 
+The problem seems to originate from a file locking mechanism when attempting to download model weights from the huggingface_hub. I have file lock issues on Perlmutter when my python code tries to download huggingface models/datasets. The symptom is hanging execution. To debug the issue, you have to run your job in an interative session, and use ctrl+c to stop the hangs. You will then see the execution runs some infinite looping to get file locks.
 
 Workaround: I used is to download the models/datasets manually and set the paths in my code to load them from local paths.
+
+
+**Error Traceback:**
+.. code-block:: python
+
+   File "/global/u2/s/sharma21/LM4HPC/Evaluation/open_ended_eval.py", line 118, in <module>
+       accuracy, results = semantic_similarity_eval(open_ended_dataset, model_name, num_rows)
+   ...
+   File "/global/common/software/nersc/pm-2022q4/sw/pytorch/2.0.1/lib/python3.9/site-packages/filelock/_api.py", line 230, in acquire
+       time.sleep(poll_interval)
+   KeyboardInterrupt
+
+**Potential Solution:** 
+1. Ensure the path for caching models is writable and has sufficient storage space.
+2. If the issue persists, consider manually downloading the model weights and loading them locally.
+3. Check if any other processes are simultaneously attempting to download/access the same model, leading to file lock contention.
+
+(Note: More detailed solutions and possible causes should be investigated.)
 

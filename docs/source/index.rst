@@ -108,6 +108,9 @@ Note: Jobs may explicitly request to run on up to 256 GPU nodes which have 80 GB
 Issues related to Perlmutter
 ============================
 
-File lock issue while loading huggingface datasets
+File lock issue while loading huggingface datasets/models
 ---------------------------------------------------------
-(Note: Description and solution needed for this issue.)
+I have file lock issues on Perlmutter when my python code tries to download huggingface models/datasets. The symptom is hanging execution.  To debug the issue, you have to run your job in an interative session, and use ctrl+c to stop the hangs. You will then see the execution runs some infinite looping to get file locks.
+
+Workaround: I used is to download the models/datasets manually and set the paths in my code to load them from local paths.
+

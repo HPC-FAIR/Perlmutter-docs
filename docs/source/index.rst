@@ -71,7 +71,7 @@ To initiate an interactive session, use the following `salloc` command:
 
 .. code-block:: bash
 
-   salloc --nodes 1 --qos interactive --time 02:00:00 --constraint gpu --gpus 4 --account=m2959_g
+   salloc --nodes 1 --qos interactive --time 02:00:00 --constraint gpu --gpus 4 --account=m2956_g
 
 This command requests an interactive session with:
 

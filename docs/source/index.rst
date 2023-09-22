@@ -105,16 +105,14 @@ Here is an example of a job script:
 
 Note: Jobs may explicitly request to run on up to 256 GPU nodes which have 80 GB of GPU-attached memory instead of 40 GB. To request this, use -C gpu&hbm80g in your job script.
 
-Issues related to Perlmutter
+Troubleshooting 
 ============================
-Issue: File lock issue while loading huggingface datasets/models (Eg. SentenceTransformer)
+File lock issue while loading huggingface datasets/models (Eg. SentenceTransformer)
 ----------------------------------------
 
 **Description:** 
 An issue arises when trying to load the SentenceTransformer model `'paraphrase-MiniLM-L6-v2'`. 
 The problem seems to originate from a file locking mechanism when attempting to download model weights from the huggingface_hub. I have file lock issues on Perlmutter when my python code tries to download huggingface models/datasets. The symptom is hanging execution. To debug the issue, you have to run your job in an interative session, and use ctrl+c to stop the hangs. You will then see the execution runs some infinite looping to get file locks.
-
-Workaround: I used is to download the models/datasets manually and set the paths in my code to load them from local paths.
 
 
 **Error Traceback:**
@@ -127,10 +125,10 @@ Workaround: I used is to download the models/datasets manually and set the paths
        time.sleep(poll_interval)
    KeyboardInterrupt
 
+
 **Potential Solution:** 
-1. Ensure the path for caching models is writable and has sufficient storage space.
-2. If the issue persists, consider manually downloading the model weights and loading them locally.
+1. I used is to download the models/datasets manually and set the paths in my code to load them from local paths.
+2. Ensure the path for caching models is writable and has sufficient storage space.
 3. Check if any other processes are simultaneously attempting to download/access the same model, leading to file lock contention.
 
-(Note: More detailed solutions and possible causes should be investigated.)
 

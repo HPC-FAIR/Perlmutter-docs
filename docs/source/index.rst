@@ -114,7 +114,6 @@ File lock issue while loading huggingface datasets/models (Eg. SentenceTransform
 An issue arises when trying to load the SentenceTransformer model `'paraphrase-MiniLM-L6-v2'`. 
 The problem seems to originate from a file locking mechanism when attempting to download model weights from the huggingface_hub. I have file lock issues on Perlmutter when my python code tries to download huggingface models/datasets. The symptom is hanging execution. To debug the issue, you have to run your job in an interative session, and use ctrl+c to stop the hangs. You will then see the execution runs some infinite looping to get file locks.
 
-
 **Error Traceback:**
 .. code-block:: python
 Add this in error File "/global/u2/s/sharma21/LM4HPC/Evaluation/open_ended_eval.py", line 118, in <module>
@@ -136,8 +135,8 @@ Add this in error File "/global/u2/s/sharma21/LM4HPC/Evaluation/open_ended_eval.
 KeyboardInterrupt
 
 
-**Potential Solution:** 
-1. I used is to download the models/datasets manually and set the paths in my code to load them from local paths.
+**Potential Solutions:** 
+1. Solution used: Download the models/datasets manually and set the paths in my code to load them from local paths.
 2. Ensure the path for caching models is writable and has sufficient storage space.
 3. Check if any other processes are simultaneously attempting to download/access the same model, leading to file lock contention.
 

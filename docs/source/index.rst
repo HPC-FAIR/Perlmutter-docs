@@ -117,13 +117,23 @@ The problem seems to originate from a file locking mechanism when attempting to 
 
 **Error Traceback:**
 .. code-block:: python
-
-   File "/global/u2/s/sharma21/LM4HPC/Evaluation/open_ended_eval.py", line 118, in <module>
-       accuracy, results = semantic_similarity_eval(open_ended_dataset, model_name, num_rows)
-   ...
-   File "/global/common/software/nersc/pm-2022q4/sw/pytorch/2.0.1/lib/python3.9/site-packages/filelock/_api.py", line 230, in acquire
-       time.sleep(poll_interval)
-   KeyboardInterrupt
+Add this in error File "/global/u2/s/sharma21/LM4HPC/Evaluation/open_ended_eval.py", line 118, in <module>
+    accuracy, results = semantic_similarity_eval(open_ended_dataset, model_name, num_rows)
+  File "/global/u2/s/sharma21/LM4HPC/Evaluation/open_ended_eval.py", line 36, in semantic_similarity_eval
+    embedder = SentenceTransformer('paraphrase-MiniLM-L6-v2')
+  File "/global/homes/s/sharma21/.local/perlmutter/pytorch2.0.1/lib/python3.9/site-packages/sentence_transformers/SentenceTransformer.py", line 87, in __init__
+    snapshot_download(model_name_or_path,
+  File "/global/homes/s/sharma21/.local/perlmutter/pytorch2.0.1/lib/python3.9/site-packages/sentence_transformers/util.py", line 491, in snapshot_download
+    path = cached_download(**cached_download_args)
+  File "/global/homes/s/sharma21/.local/perlmutter/pytorch2.0.1/lib/python3.9/site-packages/huggingface_hub/utils/_validators.py", line 118, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/global/homes/s/sharma21/.local/perlmutter/pytorch2.0.1/lib/python3.9/site-packages/huggingface_hub/file_download.py", line 770, in cached_download
+    with FileLock(lock_path):
+  File "/global/common/software/nersc/pm-2022q4/sw/pytorch/2.0.1/lib/python3.9/site-packages/filelock/_api.py", line 260, in __enter__
+    self.acquire()
+  File "/global/common/software/nersc/pm-2022q4/sw/pytorch/2.0.1/lib/python3.9/site-packages/filelock/_api.py", line 230, in acquire
+    time.sleep(poll_interval)
+KeyboardInterrupt
 
 
 **Potential Solution:** 

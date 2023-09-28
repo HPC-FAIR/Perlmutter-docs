@@ -12,7 +12,7 @@ Contents
 - `Huggingface Cache and Credentials`_
 - `Starting an Interactive Session on Perlmutter`_
 - `Example job script`_
-- `Issues related to Perlmutter`_
+- `Troubleshooting`_
 
 SSH into Perlmutter
 -------------------

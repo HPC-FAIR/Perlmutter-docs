@@ -3,6 +3,8 @@ Welcome to Perlmutter Docs!
 
 This page documents instructions to get started with Perlmutter and issues encountered while using it. The official documentation for Perlmutter can be found `here <https://docs.nersc.gov/>`_.
 
+Check live status: https://www.nersc.gov/live-status/motd/ 
+
 Contents
 --------
 

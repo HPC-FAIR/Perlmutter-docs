@@ -100,9 +100,10 @@ Here is an example of a job script:
    #SBATCH -c 32
 
    export HF_HOME=/pscratch/sd/s/sharma21/hf/
-   cd /global/homes/s/sharma21/lm-evaluation-harness
-   source lm-eval/bin/activate
-   cd /global/homes/s/sharma21/bigcode-evaluation-harness
+   cs $SCRATCH                                  #to avoid file lock issue
+   export OPENAI_API_KEY='YOUR KEY HERE'
+   echo "OPENAI_API_KEY='YOUR KEY HERE'" >> ~/.bashrc
+   source lm4hpc/bin/activate
    module load pytorch/2.0.1
 
 Note: Jobs may explicitly request to run on up to 256 GPU nodes which have 80 GB of GPU-attached memory instead of 40 GB. To request this, use -C gpu&hbm80g in your job script.
@@ -141,5 +142,14 @@ https://docs.nersc.gov/performance/io/dvs/#do-not-use-file-locking
 DVS doesn't support file locking. It's turned off by default for most codes at NERSC (including HDF5). If you do need to use any kind of file locking, please use Perlmutter Scratch.
 Keep your entire code and environment in $SCRATCH directory and run code from there. However, keep in mind that the file system is purged, which may result in portions of the software stack being removed unexpectedly. You can back up your code at HPSS https://docs.nersc.gov/filesystems/archive/
 
+Accessing wrong/old OpenAI API key from .bashrc
+----------------------------------------
+An older API key was being accessed while running jobs despite setting the environment variable in the .bashrc
+I set the environment variable in the script in both these ways and refresh the .bashrc everytime while running the jobs. Not exactly sure where the issue arises. 
+
+.. code-block:: bash
+    export OPENAI_API_KEY='YOUR KEY HERE'
+    echo "OPENAI_API_KEY='YOUR KEY HERE'" >> ~/.bashrc
+    source ~/.bashrc
 
 

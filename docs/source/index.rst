@@ -157,3 +157,9 @@ I set the environment variable in the script in both these ways and refresh the 
     echo "OPENAI_API_KEY='YOUR KEY HERE'" >> ~/.bashrc
     source ~/.bashrc
 
+Interactive mode times out while loading starchat-alpha model
+----------------------------------------
+Unable to test code on starchat-alpha in interactive mode as it takes too long to load. 
+The model should be stored in huggingface cache. 
+Looking into solutions <to be updated> 
+

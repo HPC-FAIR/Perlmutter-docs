@@ -144,12 +144,16 @@ Keep your entire code and environment in $SCRATCH directory and run code from th
 
 Accessing wrong/old OpenAI API key from .bashrc
 ----------------------------------------
-An older API key was being accessed while running jobs despite setting the environment variable in the .bashrc
+Despite updating the `OPENAI_API_KEY` environment variable in the `.bashrc` file, an older API key was being accessed when running jobs.
+
+**Solution**
+Checked if any duplicate keys are present. 
+
 I set the environment variable in the script in both these ways and refresh the .bashrc everytime while running the jobs. Not exactly sure where the issue arises. 
 
 .. code-block:: bash
+
     export OPENAI_API_KEY='YOUR KEY HERE'
     echo "OPENAI_API_KEY='YOUR KEY HERE'" >> ~/.bashrc
     source ~/.bashrc
-
 

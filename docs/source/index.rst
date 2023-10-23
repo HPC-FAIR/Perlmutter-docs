@@ -163,3 +163,14 @@ Unable to test code on starchat-alpha in interactive mode as it takes too long t
 The model should be stored in huggingface cache. 
 Looking into solutions <to be updated> 
 
+Resource allocation for interactive mode timed out
+----------------------------------------
+
+.. code-block:: bash
+
+    <username>@perlmutter:login34:/pscratch/sd/<folder>/<username>/LM4HPC/Evaluation> salloc --nodes 1 --qos 
+    interactive --time 02:00:00 --constraint gpu --gpus 4 --account=m2956_g
+    salloc: Pending job allocation 17293015
+    salloc: job 17293015 queued and waiting for resources
+    salloc: error: Unable to allocate resources: Connection timed out
+

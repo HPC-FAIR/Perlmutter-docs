@@ -42,6 +42,14 @@ To load the PyTorch module, use the following command:
 
    module load pytorch/2.0.1
 
+Note: The default location of any additional packages installed using the python version accompanying this module is controlled by the environment variable #PYTHONUSERBASE. 
+
+.. code-block:: bash
+
+   export PYTHONUSERBASE="/pscratch/sd/s/<your scratch directory controlled by environment variable $SCRATCH"
+
+
+
 Huggingface Cache and Credentials
 ---------------------------------
 
@@ -110,6 +118,14 @@ Note: Jobs may explicitly request to run on up to 256 GPU nodes which have 80 GB
 
 Troubleshooting 
 ============================
+DiskError: Allocated 40GB space in homes directory used up
+----------------------------------------
+
+Loading pytorch using module load pytorch/2.0.1 sets the default location of that in the homes directory. Any additional packages installed using pip install take up space in the homes directory. The location can be found at $PYTHONUSERBASE. It is recommended to set the location to a file system with more space. I used $SCRATCH for now but $SCRATCH is temporary storage so it is recommended to explore other options as well. 
+
+Another option is to create a virtual environment using venv. Remember to load pytorch/2.0.1 first, then use python 3.9 that comes with it to create a virtual environment. Activate the virtual environment and pip install additional packages there. Make sure to do it in the correct order to avoid conflicts. 
+
+
 File lock issue while loading huggingface datasets/models (Eg. SentenceTransformer)
 ----------------------------------------
 

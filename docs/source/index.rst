@@ -3,7 +3,7 @@ Welcome to Perlmutter Docs!
 
 This page documents instructions to get started with Perlmutter and issues encountered while using it. The official documentation for Perlmutter can be found `here <https://docs.nersc.gov/>`_.
 
-Check live status: https://www.nersc.gov/live-status/motd/ 
+Check live status: https://www.nersc.gov/live-status/motd/
 
 Contents
 --------
@@ -42,7 +42,7 @@ To load the PyTorch module, use the following command:
 
    module load pytorch/2.0.1
 
-Note: The default location of any additional packages installed using the python version accompanying this module is controlled by the environment variable #PYTHONUSERBASE. 
+Note: The default location of any additional packages installed using the python version accompanying this module is controlled by the environment variable #PYTHONUSERBASE.
 
 .. code-block:: bash
 
@@ -103,27 +103,33 @@ Here is an example of a job script:
    #SBATCH -A m2956
    #SBATCH -C gpu
    #SBATCH -q regular
-   #SBATCH -t 3:00:00
+   #SBATCH -t 15:00:00
    #SBATCH -N 1
    #SBATCH -c 32
 
    export HF_HOME=/pscratch/sd/s/sharma21/hf/
-   cs $SCRATCH                                  #to avoid file lock issue
-   export OPENAI_API_KEY='YOUR KEY HERE'
-   echo "OPENAI_API_KEY='YOUR KEY HERE'" >> ~/.bashrc
-   source lm4hpc/bin/activate
    module load pytorch/2.0.1
+   export PYTHONUSERBASE="/pscratch/sd/s/sharma21" #to prevent diskerror due to installation of packages
+   cd $SCRATCH                                  #to avoid file lock issue
+   export OPENAI_API_KEY='YOUR KEY HERE'
+   export WANDB_API_KEY='YOUR KEY HERE'
+   source ~/.bashrc
+   source hpcenv/bin/activate
+
+   wandb login
+   huggingface-cli whoami
+  
 
 Note: Jobs may explicitly request to run on up to 256 GPU nodes which have 80 GB of GPU-attached memory instead of 40 GB. To request this, use -C gpu&hbm80g in your job script.
 
-Troubleshooting 
+Troubleshooting
 ============================
 DiskError: Allocated 40GB space in homes directory used up
 ----------------------------------------
 
-Loading pytorch using module load pytorch/2.0.1 sets the default location of that in the homes directory. Any additional packages installed using pip install take up space in the homes directory. The location can be found at $PYTHONUSERBASE. It is recommended to set the location to a file system with more space. I used $SCRATCH for now but $SCRATCH is temporary storage so it is recommended to explore other options as well. 
+Loading pytorch using module load pytorch/2.0.1 sets the default location of that in the homes directory. Any additional packages installed using pip install take up space in the homes directory. The location can be found at $PYTHONUSERBASE. It is recommended to set the location to a file system with more space. I used $SCRATCH for now but $SCRATCH is temporary storage so it is recommended to explore other options as well.
 
-Another option is to create a virtual environment using venv. Remember to load pytorch/2.0.1 first, then use python 3.9 that comes with it to create a virtual environment. Activate the virtual environment and pip install additional packages there. Make sure to do it in the correct order to avoid conflicts. 
+Another option is to create a virtual environment using venv. Remember to load pytorch/2.0.1 first, then use python 3.9 that comes with it to create a virtual environment. Activate the virtual environment and pip install additional packages there. Make sure to do it in the correct order to avoid conflicts.
 
 
 File lock issue while loading huggingface datasets/models (Eg. SentenceTransformer)
@@ -154,7 +160,7 @@ An issue arises when trying to load the SentenceTransformer model `'paraphrase-M
 
 **Solution**
 
-https://docs.nersc.gov/performance/io/dvs/#do-not-use-file-locking 
+https://docs.nersc.gov/performance/io/dvs/#do-not-use-file-locking
 DVS doesn't support file locking. It's turned off by default for most codes at NERSC (including HDF5). If you do need to use any kind of file locking, please use Perlmutter Scratch.
 Keep your entire code and environment in $SCRATCH directory and run code from there. However, keep in mind that the file system is purged, which may result in portions of the software stack being removed unexpectedly. You can back up your code at HPSS https://docs.nersc.gov/filesystems/archive/
 
@@ -163,9 +169,9 @@ Accessing wrong/old OpenAI API key from .bashrc
 Despite updating the `OPENAI_API_KEY` environment variable in the `.bashrc` file, an older API key was being accessed when running jobs.
 
 **Solution**
-Checked if any duplicate keys are present. 
+Checked if any duplicate keys are present.
 
-I set the environment variable in the script in both these ways and refresh the .bashrc everytime while running the jobs. Not exactly sure where the issue arises. 
+I set the environment variable in the script in both these ways and refresh the .bashrc everytime while running the jobs. Not exactly sure where the issue arises.
 
 .. code-block:: bash
 
@@ -175,18 +181,17 @@ I set the environment variable in the script in both these ways and refresh the 
 
 Interactive mode times out while loading starchat-alpha model
 ----------------------------------------
-Unable to test code on starchat-alpha in interactive mode as it takes too long to load. 
-The model should be stored in huggingface cache. 
-Looking into solutions <to be updated> 
+Unable to test code on starchat-alpha in interactive mode as it takes too long to load.
+The model should be stored in huggingface cache.
+Looking into solutions <to be updated>
 
 Resource allocation for interactive mode timed out
 ----------------------------------------
 
 .. code-block:: bash
 
-    <username>@perlmutter:login34:/pscratch/sd/<folder>/<username>/LM4HPC/Evaluation> salloc --nodes 1 --qos 
+    <username>@perlmutter:login34:/pscratch/sd/<folder>/<username>/LM4HPC/Evaluation> salloc --nodes 1 --qos
     interactive --time 02:00:00 --constraint gpu --gpus 4 --account=m2956_g
     salloc: Pending job allocation 17293015
     salloc: job 17293015 queued and waiting for resources
     salloc: error: Unable to allocate resources: Connection timed out
-
